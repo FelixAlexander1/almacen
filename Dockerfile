@@ -1,26 +1,19 @@
-# 1️⃣ Usamos Java 17 JDK
+# Java 17
 FROM eclipse-temurin:17-jdk-alpine
-
-# 2️⃣ Definimos carpeta de trabajo dentro del contenedor
 WORKDIR /app
 
-# 3️⃣ Copiamos mvnw y archivos de Maven
-COPY mvnw . 
-COPY mvnw.cmd . 
-COPY pom.xml .
+# Copiamos mvnw y Maven
+COPY mvnw mvnw.cmd pom.xml ./
 COPY .mvn .mvn
-
-# 4️⃣ Instalamos dependencias sin compilar para usar cache de Docker
 RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 
-# 5️⃣ Copiamos el resto del proyecto
-COPY src src
+# Copiamos el frontend construido
+COPY ../frontend/dist src/main/resources/static
 
-# 6️⃣ Construimos la aplicación
+# Copiamos el backend
+COPY src src
 RUN ./mvnw clean package -DskipTests
 
-# 7️⃣ Exponemos el puerto en el que corre Spring Boot
 EXPOSE 8080
-
-# 8️⃣ Comando para arrancar la app
 CMD ["java", "-jar", "target/almacen-0.0.1-SNAPSHOT.jar"]
+

@@ -1,0 +1,140 @@
+.product-list-container {
+  padding: 24px;
+  background-color: #f5f6fa;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.product-list-container.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #6b7280;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mode-switch:hover {
+  background: #4b5563;
+}
+
+.btn-create {
+  background: #10b981;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-create:hover {
+  background: #059669;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.products-table th,
+.products-table td {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+}
+
+.products-table th {
+  background-color: #e5e7eb;
+}
+
+.product-list-container.dark-mode .products-table th,
+.product-list-container.dark-mode .products-table td {
+  border-color: #374151;
+}
+
+.product-list-container.dark-mode .products-table th {
+  background-color: #374151;
+}
+
+.btn-edit {
+  background: #3b82f6;
+  color: #fff;
+  padding: 4px 8px;
+  margin-right: 6px;
+  border-radius: 4px;
+}
+
+.btn-edit:hover {
+  background: #2563eb;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+}
+
+.product-list-container.dark-mode .modal {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.btn-cancel {
+  background: #6b7280;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.btn-cancel:hover {
+  background: #4b5563;
+}

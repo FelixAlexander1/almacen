@@ -1,0 +1,169 @@
+/* Contenedor principal */
+.workstation-container {
+  background-color: #f5f6fa;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 24px;
+}
+
+.workstation-container.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+/* Encabezado */
+.workstation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botones de modo oscuro y recargar */
+.mode-switch,
+.btn-refresh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.mode-switch {
+  background: #6b7280;
+  color: #fff;
+}
+
+.mode-switch:hover {
+  background: #4b5563;
+}
+
+.btn-refresh {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn-refresh:hover {
+  background: #2563eb;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Tabla */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workstation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #fff;
+}
+
+.workstation-container.dark-mode .workstation-table {
+  background: #2d3748;
+}
+
+/* Cabecera de tabla */
+.workstation-table th {
+  background: #e5e7eb;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.workstation-container.dark-mode .workstation-table th {
+  background: #4b5563;
+  border-bottom: 2px solid #374151;
+}
+
+/* Celdas */
+.workstation-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.workstation-container.dark-mode .workstation-table td {
+  border-bottom: 1px solid #4b5563;
+}
+
+/* Filas hover */
+.workstation-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.workstation-container.dark-mode .workstation-table tbody tr:hover {
+  background: #374151;
+}
+
+/* Texto centrado */
+.text-center {
+  text-align: center;
+}
+
+/* Estados con colores */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background-color: #fef9c3;
+  color: #92400e;
+}
+
+.status.in-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status.completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+/* Botón de completar */
+.btn-complete {
+  background-color: #10b981;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-complete:hover {
+  background-color: #059669;
+}
+
+/* Mensajes vacíos */
+.empty {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #6b7280;
+}

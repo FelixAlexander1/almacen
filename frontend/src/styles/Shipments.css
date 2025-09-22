@@ -1,0 +1,139 @@
+/* Contenedor principal */
+.shipments-container {
+  background-color: #f5f6fa;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 24px;
+}
+
+.shipments-container.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+/* Encabezado con el botón de modo oscuro */
+.shipments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #6b7280;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.mode-switch:hover {
+  background: #4b5563;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Tabla principal */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shipments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #fff;
+}
+
+.shipments-container.dark-mode .shipments-table {
+  background: #2d3748;
+}
+
+/* Cabecera de la tabla */
+.shipments-table th {
+  background: #e5e7eb;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.shipments-container.dark-mode .shipments-table th {
+  background: #4b5563;
+  border-bottom: 2px solid #374151;
+}
+
+/* Celdas */
+.shipments-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.shipments-container.dark-mode .shipments-table td {
+  border-bottom: 1px solid #4b5563;
+}
+
+/* Filas hover */
+.shipments-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.shipments-container.dark-mode .shipments-table tbody tr:hover {
+  background: #374151;
+}
+
+/* Texto centrado */
+.text-center {
+  text-align: center;
+}
+
+/* Estado con colores */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status.created {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status.in-transit {
+  background-color: #fef9c3;
+  color: #92400e;
+}
+
+.status.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Mensaje cuando no hay datos */
+.empty {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #6b7280;
+}

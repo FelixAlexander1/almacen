@@ -1,0 +1,129 @@
+.inventory-container {
+  padding: 24px;
+  background-color: #f5f6fa;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inventory-container.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #6b7280;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mode-switch:hover {
+  background: #4b5563;
+}
+
+.btn-refresh {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #3b82f6;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-refresh:hover {
+  background: #2563eb;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  flex: 1;
+}
+
+.inventory-container.dark-mode .filters input {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+}
+
+.inventory-table th {
+  background-color: #e5e7eb;
+}
+
+.inventory-container.dark-mode .inventory-table th,
+.inventory-container.dark-mode .inventory-table td {
+  border-color: #374151;
+}
+
+.inventory-container.dark-mode .inventory-table th {
+  background-color: #374151;
+}
+
+.actions button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.btn-adjust {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.btn-adjust:hover {
+  background-color: #d97706;
+}
+
+.btn-transfer {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.btn-transfer:hover {
+  background-color: #2563eb;
+}

@@ -1,0 +1,98 @@
+.inbound-container {
+  padding: 24px;
+  background-color: #f5f6fa;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inbound-container.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.inbound-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #6b7280;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mode-switch:hover {
+  background: #4b5563;
+}
+
+.btn-refresh {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #3b82f6;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-refresh:hover {
+  background: #2563eb;
+}
+
+.inbound-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.inbound-table th,
+.inbound-table td {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+}
+
+.inbound-table th {
+  background-color: #e5e7eb;
+  text-align: left;
+}
+
+.inbound-container.dark-mode .inbound-table th,
+.inbound-container.dark-mode .inbound-table td {
+  border-color: #374151;
+}
+
+.inbound-container.dark-mode .inbound-table th {
+  background-color: #374151;
+}
+
+.btn-receive {
+  background-color: #10b981;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-receive:hover {
+  background-color: #059669;
+}

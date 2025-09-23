@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext'; 
 import { Sun, Moon } from 'lucide-react';
-import '../../styles/layout.css';
+import '../../styles/Layout.css';
 
 const Layout = ({ children }) => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);

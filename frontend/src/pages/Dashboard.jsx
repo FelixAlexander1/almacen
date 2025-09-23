@@ -18,7 +18,7 @@ import {
   PlusCircle
 } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext'; 
-import '../styles/Dashboard.css';
+import '../styles/dashboard.css';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({

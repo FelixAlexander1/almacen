@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Location {
 private UUID id;
-private String code; // Ejemplo: "A-01-01"
+private String code; // "A-01-01"
 private String type; // PICK, BUFFER, BULK, DOCK
-private int capacity; // volumen/unidades
+private int capacity; 
 }

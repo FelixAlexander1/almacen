@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
-public class JpaLocationRepositoryImpl implements LocationRepository { // dominio
-    private final LocationJpaRepository jpaRepository; // Spring Data
+public class JpaLocationRepositoryImpl implements LocationRepository { 
+    private final LocationJpaRepository jpaRepository; 
     private final LocationMapper mapper;
 
     @Override

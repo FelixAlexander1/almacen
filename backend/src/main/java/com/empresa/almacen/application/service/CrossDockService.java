@@ -24,9 +24,6 @@ public class CrossDockService {
     private final InboundRepository inboundRepository;
     private final ShipmentRepository shipmentRepository;
 
-    /**
-     * Crea una operación de crossdock
-     */
     @Transactional
     public CrossDockOperationDTO create(CrossDockOperationDTO request) {
         // Validar inbound

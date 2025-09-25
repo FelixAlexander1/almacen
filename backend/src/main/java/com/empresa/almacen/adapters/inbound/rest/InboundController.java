@@ -24,7 +24,7 @@ public class InboundController {
     private final ReceiveInboundService receiveInboundService;
     private final InboundDTOMapper inboundDTOMapper;
 
-    // Crear ASN
+    
     @PostMapping
     public ResponseEntity<InboundDTO> createInbound(@Valid @RequestBody InboundDTO request) {
         // Convertir DTO → Domain

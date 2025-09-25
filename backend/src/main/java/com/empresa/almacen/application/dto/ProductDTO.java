@@ -13,7 +13,7 @@ public class ProductDTO {
     private String sku;
     private String name;
     private String description;
-    private String uom; // Unidad de medida
+    private String uom; 
     private double length;
     private double width;
     private double height;

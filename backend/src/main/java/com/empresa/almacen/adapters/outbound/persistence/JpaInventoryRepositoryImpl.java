@@ -89,14 +89,12 @@ public class JpaInventoryRepositoryImpl implements InventoryRepository {
 
     @Override
     public void delete(InventoryItem item) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Override
     public Optional<InventoryItem> findById(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        // TODO Auto-generated method stubon("Unimplemented method 'findById'");
     }
 
 

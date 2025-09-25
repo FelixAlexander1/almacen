@@ -67,7 +67,6 @@ public interface InventoryItemMapper {
         entity.setQuantityReserved(domain.getQuantityReserved());
         entity.setLotNumber(domain.getLotNumber());
         entity.setExpiryDate(domain.getExpiryDate());
-        // product y location se asignarán manualmente en el repositorio
         return entity;
     }
 

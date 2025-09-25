@@ -22,12 +22,12 @@ private UUID id;
 
 
 @Column(nullable = false, unique = true)
-private String code; // Ejemplo: "A-01-01"
+private String code; 
 
 
 @Column(nullable = false)
 private String type; // PICK, BUFFER, BULK, DOCK
 
 
-private int capacity; // volumen/unidades
+private int capacity; 
 }

@@ -21,10 +21,6 @@ public interface InboundItemMapper {
     @Mapping(source = "product", target = "productId", qualifiedByName = "mapProductEntityToId")
     InboundItem toDomain(InboundItemEntity entity);
 
-    // ===========================
-    // Métodos auxiliares MapStruct
-    // ===========================
-
     @Named("mapProductIdToEntity")
     default ProductEntity mapProductIdToEntity(UUID productId) {
         if (productId == null) return null;

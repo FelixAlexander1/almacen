@@ -18,6 +18,6 @@ public class InventoryCountDTO {
     @Min(0)
     private int countedQuantity;
 
-    private String lotNumber; // Opcional
+    private String lotNumber; 
 }
 

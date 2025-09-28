@@ -1,13 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getInventory, adjustInventory, transferInventory, getLocations } from "../../services/api";
-import { ThemeContext } from "../../context/ThemeContext"; 
+import {
+  getInventory,
+  adjustInventory,
+  transferInventory,
+  getLocations,
+  reserveStock
+} from "../../services/api";
+import { ThemeContext } from "../../context/ThemeContext";
+import "../../styles/InventoryView.css";
 
 export default function InventoryView() {
   const [inventory, setInventory] = useState([]);
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ product: "", sku: "", location: "" });
-  
+
   const [transferItemId, setTransferItemId] = useState(null);
   const [transferQty, setTransferQty] = useState(0);
   const [transferLocation, setTransferLocation] = useState("");
@@ -15,12 +22,17 @@ export default function InventoryView() {
   const [adjustItemId, setAdjustItemId] = useState(null);
   const [adjustQty, setAdjustQty] = useState(0);
 
-  const { darkMode } = useContext(ThemeContext); 
+  const [reserveItemId, setReserveItemId] = useState(null);
+  const [reserveQty, setReserveQty] = useState(0);
 
+  const { darkMode } = useContext(ThemeContext);
+
+  // --- Cargar inventario ---
   const loadInventory = async () => {
     setLoading(true);
     try {
       const res = await getInventory();
+      console.log("Datos de inventario recibidos:", res.data); // 👀 Verifica la estructura
       setInventory(res.data);
     } catch (err) {
       console.error("Error fetching inventory:", err);
@@ -29,6 +41,8 @@ export default function InventoryView() {
     }
   };
 
+
+  // --- Cargar ubicaciones ---
   const loadLocations = async () => {
     try {
       const res = await getLocations();
@@ -43,6 +57,7 @@ export default function InventoryView() {
     loadLocations();
   }, []);
 
+  // --- Filtros ---
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
@@ -66,13 +81,49 @@ export default function InventoryView() {
       return;
     }
     try {
-      await adjustInventory({ productId: item.product.id, locationId: item.location.id, countedQuantity: adjustQty });
+      await adjustInventory({
+        productId: item.product.id,
+        locationId: item.location.id,
+        countedQuantity: adjustQty
+      });
       setAdjustItemId(null);
       loadInventory();
     } catch (error) {
       console.error(error);
     }
   };
+
+  // --- Reservar Stock ---
+  const confirmReserve = async (item) => {
+  const available = (item.quantityTotal || 0) - (item.quantityReserved || 0);
+
+  if (!item.product || !item.location) {
+    alert("No se puede reservar porque el producto o la ubicación no están definidos.");
+    return;
+  }
+
+  if (reserveQty <= 0 || reserveQty > available) {
+    alert(`Cantidad inválida. Debe ser entre 1 y ${available}`);
+    return;
+  }
+
+  try {
+    await reserveStock({
+      productId: item.product.id,
+      locationId: item.location.id,
+      reservedQuantity: reserveQty
+    });
+
+    // recarga inventario completo desde backend
+    await loadInventory();
+
+    setReserveItemId(null);
+    setReserveQty(0);
+  } catch (error) {
+    console.error("Error reservando stock:", error);
+    alert("Error al reservar stock");
+  }
+};
 
   // --- Transferir Stock ---
   const startTransfer = (item) => {
@@ -96,7 +147,7 @@ export default function InventoryView() {
         productId: item.product.id,
         fromLocationId: item.location.id,
         toLocationId: transferLocation,
-        quantity: transferQty,
+        quantity: transferQty
       });
       setTransferItemId(null);
       loadInventory();
@@ -108,15 +159,30 @@ export default function InventoryView() {
   if (loading) return <p className="p-4">Cargando inventario...</p>;
 
   return (
-    <div className={`product-list-container ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`product-list-container ${darkMode ? "dark-mode" : ""}`}>
       <div className="header flex justify-between items-center mb-4">
         <h1 className="title">Inventario</h1>
       </div>
 
       <div className="filters">
-        <input name="product" placeholder="Filtrar por Producto" value={filters.product} onChange={handleFilterChange} />
-        <input name="sku" placeholder="Filtrar por SKU" value={filters.sku} onChange={handleFilterChange} />
-        <input name="location" placeholder="Filtrar por Ubicación" value={filters.location} onChange={handleFilterChange} />
+        <input
+          name="product"
+          placeholder="Filtrar por Producto"
+          value={filters.product}
+          onChange={handleFilterChange}
+        />
+        <input
+          name="sku"
+          placeholder="Filtrar por SKU"
+          value={filters.sku}
+          onChange={handleFilterChange}
+        />
+        <input
+          name="location"
+          placeholder="Filtrar por Ubicación"
+          value={filters.location}
+          onChange={handleFilterChange}
+        />
       </div>
 
       <table className="products-table">
@@ -145,10 +211,26 @@ export default function InventoryView() {
                   <td>{item.location?.code || "-"}</td>
                   <td>{item.quantityTotal}</td>
                   <td>{item.quantityReserved}</td>
-                  <td>{available} / {item.quantityTotal} <small>(Reservado: {item.quantityReserved})</small></td>
                   <td>
-                    <button className="btn-edit" onClick={() => startAdjust(item)}>Ajustar</button>
-                    <button className="btn-delete" onClick={() => startTransfer(item)}>Transferir</button>
+                    {available} / {item.quantityTotal}{" "}
+                    <small>(Reservado: {item.quantityReserved})</small>
+                  </td>
+                  <td>
+                    <button
+                      className="btn-reserve"
+                      onClick={() => {
+                        setReserveItemId(item.id);
+                        setReserveQty(1);
+                      }}
+                    >
+                      Reservar
+                    </button>
+                    <button className="btn-adjust" onClick={() => startAdjust(item)}>
+                      Ajustar
+                    </button>
+                    <button className="btn-transfer" onClick={() => startTransfer(item)}>
+                      Transferir
+                    </button>
                   </td>
                 </tr>
 
@@ -157,11 +239,11 @@ export default function InventoryView() {
                   <tr>
                     <td colSpan={7}>
                       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                        <input 
-                          type="number" 
-                          value={adjustQty} 
+                        <input
+                          type="number"
+                          value={adjustQty}
                           min={item.quantityReserved} // no puede bajar de reservado
-                          onChange={e => setAdjustQty(Number(e.target.value))}
+                          onChange={(e) => setAdjustQty(Number(e.target.value))}
                         />
                         <button onClick={() => confirmAdjust(item)}>Confirmar</button>
                         <button onClick={() => setAdjustItemId(null)}>Cancelar</button>
@@ -175,23 +257,47 @@ export default function InventoryView() {
                   <tr>
                     <td colSpan={7}>
                       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                        <select value={transferLocation} onChange={e => setTransferLocation(e.target.value)}>
+                        <select
+                          value={transferLocation}
+                          onChange={(e) => setTransferLocation(e.target.value)}
+                        >
                           <option value="">Seleccione ubicación destino</option>
                           {locations
-                            .filter(loc => loc.id !== item.location.id)
-                            .map(loc => (
-                              <option key={loc.id} value={loc.id}>{loc.code}</option>
+                            .filter((loc) => loc.id !== item.location.id)
+                            .map((loc) => (
+                              <option key={loc.id} value={loc.id}>
+                                {loc.code}
+                              </option>
                             ))}
                         </select>
-                        <input 
-                          type="number" 
-                          value={transferQty} 
-                          min={1} 
+                        <input
+                          type="number"
+                          value={transferQty}
+                          min={1}
                           max={available} // límite por stock disponible
-                          onChange={e => setTransferQty(Number(e.target.value))}
+                          onChange={(e) => setTransferQty(Number(e.target.value))}
                         />
                         <button onClick={() => confirmTransfer(item)}>Confirmar</button>
                         <button onClick={() => setTransferItemId(null)}>Cancelar</button>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+
+                {/* Reserva inline */}
+                {reserveItemId === item.id && (
+                  <tr>
+                    <td colSpan={7}>
+                      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                        <input
+                          type="number"
+                          value={reserveQty}
+                          min={1}
+                          max={available} // no más de lo disponible
+                          onChange={(e) => setReserveQty(Number(e.target.value))}
+                        />
+                        <button onClick={() => confirmReserve(item)}>Confirmar</button>
+                        <button onClick={() => setReserveItemId(null)}>Cancelar</button>
                       </div>
                     </td>
                   </tr>

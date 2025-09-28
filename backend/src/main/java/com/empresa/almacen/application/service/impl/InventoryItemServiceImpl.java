@@ -88,12 +88,13 @@ public class InventoryItemServiceImpl implements InventoryItemService {
         // Convertimos cada entidad a DTO y calculamos el stock reservado
         return entities.stream()
                 .map(entity -> {
-                        InventoryItemDTO dto = inventoryMapper.toDTO(entity);
-                        int reserved = calculateReserved(entity.getProduct(), entity.getLocation());
-                        dto.setQuantityReserved(reserved);
-                        return dto;
+                InventoryItemDTO dto = inventoryMapper.toDTO(entity);
+                // usar directamente el stock reservado actual
+                dto.setQuantityReserved(entity.getQuantityReserved());
+                return dto;
                 })
                 .collect(Collectors.toList());
+
         }
 
 
@@ -203,9 +204,25 @@ public class InventoryItemServiceImpl implements InventoryItemService {
                 .sum();
         }
 
+        @Override
+        public void reserveStock(UUID productId, UUID locationId, int reservedQuantity) {
+            ProductEntity product = productRepository.findById(productId)
+                    .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
 
+            LocationEntity location = locationRepository.findById(locationId)
+                    .orElseThrow(() -> new IllegalArgumentException("Ubicación no encontrada"));
 
+            InventoryItemEntity item = inventoryItemRepository
+                    .findByProductIdAndLocationId(product.getId(), location.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Inventario no encontrado para ese producto y ubicación"));
 
+            int availableStock = item.getQuantityTotal() - item.getQuantityReserved();
+            if (reservedQuantity > availableStock) {
+                throw new IllegalArgumentException("No hay suficiente stock disponible para reservar");
+            }
 
+            item.setQuantityReserved(item.getQuantityReserved() + reservedQuantity);
+            inventoryItemRepository.save(item);
+        }
 
 }

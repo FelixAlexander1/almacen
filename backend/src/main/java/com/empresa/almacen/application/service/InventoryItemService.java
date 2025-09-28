@@ -20,4 +20,6 @@ public interface InventoryItemService {
 
     void adjust(InventoryCountDTO dto);
 
+    void reserveStock(UUID productId, UUID locationId, int reservedQuantity);
+
 }

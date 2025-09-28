@@ -42,6 +42,9 @@ export const confirmInbound = (id, body) => api.post(`/inbounds/${id}/receive`, 
 export const getInventory = () => api.get('/inventory');
 export const adjustInventory = (data) => api.post('/inventory/adjust', data);
 export const transferInventory = (data) => api.post('/inventory/transfer', data);
+export const reserveStock = (data) => api.post('/inventory/reserve', data);
+
+
 
 // CrossDock
 export const createCrossDock = (data) => api.post('/crossdock', data);

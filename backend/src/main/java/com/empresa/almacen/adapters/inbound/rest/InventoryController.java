@@ -3,11 +3,13 @@ package com.empresa.almacen.adapters.inbound.rest;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import javax.validation.Valid;
 
 import com.empresa.almacen.application.dto.InventoryCountDTO;
 import com.empresa.almacen.application.dto.InventoryItemDTO;
 import com.empresa.almacen.application.dto.InventoryTransferDTO;
+import com.empresa.almacen.application.dto.ReserveRequest;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +56,12 @@ public class InventoryController {
     public void adjust(@RequestBody @Valid InventoryCountDTO dto) {
         inventoryService.adjust(dto);
     }
+    @PostMapping("/reserve")
+    public ResponseEntity<?> reserveStock(@RequestBody ReserveRequest request) {
+        inventoryService.reserveStock(request.getProductId(), request.getLocationId(), request.getReservedQuantity());
+        return ResponseEntity.ok().build();
+    }
+
 
 }
 

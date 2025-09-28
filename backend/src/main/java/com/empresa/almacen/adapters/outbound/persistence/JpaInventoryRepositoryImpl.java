@@ -94,7 +94,7 @@ public class JpaInventoryRepositoryImpl implements InventoryRepository {
 
     @Override
     public Optional<InventoryItem> findById(UUID id) {
-        // TODO Auto-generated method stubon("Unimplemented method 'findById'");
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
 
